@@ -86,22 +86,21 @@ export class GameScene extends Scene {
     spawnObstacle(type) {
         let obstacle;
         let velocity;
-        switch (type) {
-            case "Cloud":
-                obstacle = new Cloud(50);
-                break;
-            case "Crow":
-                velocity = this.getRandomVelocity(80, 120);
-                obstacle = new Crow(velocity);
-                break;
-            case "Broom":
-                velocity = this.getRandomVelocity(350, 450);
-                obstacle = new Broom(velocity);
-                break;
-            default:
-                return;
+
+        if (type === "Cloud") {
+            obstacle = new Cloud(50);
+        } else if (type === "Crow") {
+            velocity = this.getRandomVelocity(80, 120);
+            obstacle = new Crow(velocity);
+        } else if (type === "Broom") {
+            velocity = this.getRandomVelocity(350, 450);
+            obstacle = new Broom(velocity);
+        } else {
+            return;
         }
+
         this.add(obstacle);
+
     }
 
     getRandomVelocity(min, max) {
