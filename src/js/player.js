@@ -109,16 +109,16 @@ export class Player extends Actor {
         let speedX = 0;
         let speedY = 0;
 
-        if (engine.input.keyboard.isHeld(Input.Keys.Left)) {
+        if (engine.input.keyboard.isHeld(Input.Keys.Left) || engine.input.keyboard.isHeld(Input.Keys.A)) {
             speedX = -200;
         }
-        if (engine.input.keyboard.isHeld(Input.Keys.Right)) {
+        if (engine.input.keyboard.isHeld(Input.Keys.Right) || engine.input.keyboard.isHeld(Input.Keys.D)) {
             speedX = 200;
         }
-        if (engine.input.keyboard.isHeld(Input.Keys.Up)) {
+        if (engine.input.keyboard.isHeld(Input.Keys.Up) || engine.input.keyboard.isHeld(Input.Keys.W)) {
             speedY = -200;
         }
-        if (engine.input.keyboard.isHeld(Input.Keys.Down)) {
+        if (engine.input.keyboard.isHeld(Input.Keys.Down) || engine.input.keyboard.isHeld(Input.Keys.S)) {
             speedY = 200;
         }
 

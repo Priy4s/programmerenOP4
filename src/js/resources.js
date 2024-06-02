@@ -1,6 +1,4 @@
 import { ImageSource, Sound, Resource, Loader, ImageWrapping } from 'excalibur'
-import { Background } from './background'
-import { Shield } from './shield'
 
 const Resources = {
     CrowUp: new ImageSource('images/crow_1.png'),
