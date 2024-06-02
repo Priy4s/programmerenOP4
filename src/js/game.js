@@ -1,22 +1,43 @@
-import '../css/style.css'
-import { Actor, Engine, Vector } from "excalibur"
-import { Resources, ResourceLoader } from './resources.js'
+import '../css/style.css';
+import { Engine, Label } from "excalibur";
+import { Resources, ResourceLoader } from './resources.js';
+import { GameScene } from './gameScene.js';
+import { GameOverScene } from './gameOverScene.js';
+import { BaseObstacle } from './baseObstacle.js';
+import { Shield } from './shield.js';
 
 export class Game extends Engine {
-
     constructor() {
-        super({ width: 800, height: 600 })
-        this.start(ResourceLoader).then(() => this.startGame())
+        super({ width: 1280, height: 720 });
+        this.score = 0;
+        this.start(ResourceLoader).then(() => this.startGame());
+    }
+
+    onInitialize() {
+        console.log("start the game!");
+        this.add('game', new GameScene());
+        this.add('gameover', new GameOverScene(this));
+    }
+
+    resetGame() {
+        this.currentScene.timers.forEach(timer => timer.cancel());
+
+        this.currentScene.actors.forEach(actor => {
+            if (actor instanceof BaseObstacle || actor instanceof Shield) {
+                actor.kill();
+            }
+            if (actor instanceof Label && actor.text.startsWith('Score:')) {
+                actor.kill();
+            }
+        });
+
+        this.goToScene('gameover');
+        console.log("in reset game");
     }
 
     startGame() {
-        console.log("start de game!")
-        const fish = new Actor()
-        fish.graphics.use(Resources.Fish.toSprite())
-        fish.pos = new Vector(400, 300)
-        fish.vel = new Vector(-10,0)
-        this.add(fish)
+        this.goToScene('game');
     }
 }
 
-new Game()
+new Game();
